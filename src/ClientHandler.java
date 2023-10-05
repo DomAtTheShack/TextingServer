@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHandler extends Thread {
-    private static List<ClientHandler> clients = new ArrayList<>();
+    private static final List<ClientHandler> clients = new ArrayList<>();
     private Socket clientSocket;
     private PrintWriter out;
     private String username;
@@ -34,13 +34,7 @@ public class ClientHandler extends Thread {
             while ((message = in.readLine()) != null) {
                 if (message.equals("GET_CLIENTS")) {
                     // Respond with the list of clients
-                    synchronized (clients) {
-                        StringBuilder clientList = new StringBuilder("CLIENT_LIST:");
-                        for (ClientHandler client : clients) {
-                            clientList.append(client.getUsername()).append(",");
-                        }
-                        out.println(clientList.toString());
-                    }
+                        out.println(listToArray(clients));
                 } else {
                     // Handle regular messages
                     synchronized (clients) {
@@ -65,6 +59,15 @@ public class ClientHandler extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String listToArray(List<ClientHandler> clients) {
+        StringBuilder x = new StringBuilder();
+        for(int i = 0;i<clients.size();i++){
+            x.append(clients.get(i).username+",");
+        }
+        System.out.println(x.toString());
+        return x.toString();
     }
 
     public void sendMessage(String message) {
