@@ -21,10 +21,12 @@ public class ClientHandler extends Thread {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
             this.username = in.readLine();
+            System.out.println(username + " has connected.");
             out.println(username + " has connected.");
 
             synchronized (clients) {
                 for (ClientHandler client : clients) {
+                    System.out.println(username + " has joined the chat.");
                     client.sendMessage(username + " has joined the chat.");
                 }
                 clients.add(this);
@@ -39,6 +41,7 @@ public class ClientHandler extends Thread {
                     // Handle regular messages
                     synchronized (clients) {
                         for (ClientHandler client : clients) {
+                            System.out.println(username + ": " + message);
                             client.sendMessage(username + ": " + message);
                         }
                     }
@@ -50,6 +53,7 @@ public class ClientHandler extends Thread {
             synchronized (clients) {
                 clients.remove(this);
                 for (ClientHandler client : clients) {
+                    System.out.println(username + " has left the chat.");
                     client.sendMessage(username + " has left the chat.");
                 }
             }
@@ -63,10 +67,10 @@ public class ClientHandler extends Thread {
 
     private String listToArray(List<ClientHandler> clients) {
         StringBuilder x = new StringBuilder();
+        x.append("CLIENT_LIST:");
         for(int i = 0;i<clients.size();i++){
             x.append(clients.get(i).username+",");
         }
-        System.out.println(x.toString());
         return x.toString();
     }
 
