@@ -9,44 +9,47 @@ public class Server {
 
     public static void main(String[] args) {
         try {
-            if (args[0].equals("-nogui")) {
-                ServerSocket serverSocket = new ServerSocket(PORT);
-                System.out.println("Server started. Waiting for clients to connect...");
+            if (!(args.length == 0)) {
+                if (args.length >= 2 || !args[0].equals("-nogui")) {
+                    System.out.println("Invalid Args or Too Many");
+                    System.exit(0);
+                } else if (args[0].equals("-nogui")) {
+                    ServerSocket serverSocket = new ServerSocket(PORT);
+                    System.out.println("Server started. Waiting for clients to connect...");
 
-                while (true) {
-                    Socket clientSocket = serverSocket.accept();
-                    new ClientHandler(clientSocket).start();
+                    while (true) {
+                        Socket clientSocket = serverSocket.accept();
+                        new ClientHandler(clientSocket).start();
+                    }
                 }
-            } else if (args.length >= 2) {
-                System.out.println("Invalid Args or Too Many");
-            } else {
-                JFrame frame = new JFrame("Console Capture");
-                frame.setSize(400, 300);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else {
+                    JFrame frame = new JFrame("Console Capture");
+                    frame.setSize(400, 300);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                JTextArea consoleTextArea = new JTextArea();
-                consoleTextArea.setEditable(false);
+                    JTextArea consoleTextArea = new JTextArea();
+                    consoleTextArea.setEditable(false);
 
-                // Create a custom OutputStream to capture System.out.print
-                PrintStream printStream = new PrintStream(new CustomOutputStream(consoleTextArea));
-                System.setOut(printStream);
+                    // Create a custom OutputStream to capture System.out.print
+                    PrintStream printStream = new PrintStream(new CustomOutputStream(consoleTextArea));
+                    System.setOut(printStream);
 
-                JScrollPane scrollPane = new JScrollPane(consoleTextArea);
-                frame.add(scrollPane);
+                    JScrollPane scrollPane = new JScrollPane(consoleTextArea);
+                    frame.add(scrollPane);
 
-                frame.setVisible(true);
-                ServerSocket serverSocket = new ServerSocket(PORT);
-                System.out.println("Server started. Waiting for clients to connect...");
+                    frame.setVisible(true);
+                    ServerSocket serverSocket = new ServerSocket(PORT);
+                    System.out.println("Server started. Waiting for clients to connect...");
 
-                while (true) {
-                    Socket clientSocket = serverSocket.accept();
-                    new ClientHandler(clientSocket).start();
+                    while (true) {
+                        Socket clientSocket = serverSocket.accept();
+                        new ClientHandler(clientSocket).start();
+                    }
                 }
-            }
             } catch(IOException e){
-                e.printStackTrace();
+                    e.printStackTrace();
+                }
             }
-        }
     private static class CustomOutputStream extends OutputStream {
         private JTextArea textArea;
 
