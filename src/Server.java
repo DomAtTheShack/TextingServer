@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Server {
 
-    private static final int PORT = 12345;
+    private static final int PORT = 2049;
 
     public static void main(String[] args) {
         try {
