@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Server GUI added with args too" />
+    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Port Update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +17,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -33,7 +37,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/dominichann/IdeaProjects/TextingClient",
+    "last_opened_file_path": "/home/dominichann/IdeaProjects/TextingServer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,7 +83,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696631354144</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Port Update">
+      <option name="closed" value="true" />
+      <created>1696632262940</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696632262940</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -92,6 +104,7 @@
     <MESSAGE value="Server Client Fix" />
     <MESSAGE value="Server GUI added with args to" />
     <MESSAGE value="Server GUI added with args too" />
-    <option name="LAST_COMMIT_MESSAGE" value="Server GUI added with args too" />
+    <MESSAGE value="Port Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Port Update" />
   </component>
 </project>

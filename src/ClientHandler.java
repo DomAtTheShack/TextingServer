@@ -41,7 +41,6 @@ public class ClientHandler extends Thread {
                     // Handle regular messages
                     synchronized (clients) {
                         for (ClientHandler client : clients) {
-                            System.out.println(username + ": " + message);
                             client.sendMessage(username + ": " + message);
                         }
                     }
