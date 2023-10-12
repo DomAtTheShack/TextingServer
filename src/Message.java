@@ -1,5 +1,7 @@
-import java.io.*;
-import java.net.Socket;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,6 +16,9 @@ public class Message implements Serializable {
     private boolean isImage;
     private boolean isRequest;
     private List<String> users;
+    private String userSent;
+    private byte[] image;
+
 
     /**
      *
@@ -38,6 +43,12 @@ public class Message implements Serializable {
         this.isRequest = isRequest;
     }
 
+    public Message(byte[] imageByteArray, boolean isImage, String userSent) {
+        this.isImage = isImage;
+        this.userSent = userSent;
+        image = imageByteArray;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -53,6 +64,7 @@ public class Message implements Serializable {
     public List<String> getUsers() {
         return users;
     }
+    public String getUserSent(){return userSent;}
 
     public static void sendObject(ObjectOutputStream objectOutputStream, Message message) throws IOException {
         objectOutputStream.writeObject(message);
@@ -61,5 +73,9 @@ public class Message implements Serializable {
 
     public static Message receiveObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
         return (Message) objectInputStream.readObject();
+    }
+
+    public byte[] getImageData() {
+        return image;
     }
 }

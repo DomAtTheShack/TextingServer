@@ -38,6 +38,12 @@ public class ClientHandler extends Thread {
                     if (message.isRequest()) {
                         // Respond with the list of clients
                         objectOutputStream.writeObject(new Message(getUsers(), false, true));
+                    } else if (message.isImage()) {
+                        synchronized (clients) {
+                            for (ClientHandler client : clients) {
+                                client.sendImage(message.getImageData());
+                            }
+                        }
                     } else {
                         // Handle regular messages
                         synchronized (clients) {
@@ -69,6 +75,12 @@ public class ClientHandler extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void sendImage(byte[] imageData) throws IOException {
+        if (objectOutputStream != null){
+            Message.sendObject(objectOutputStream, new Message(imageData,true,username));
         }
     }
 
