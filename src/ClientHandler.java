@@ -1,14 +1,15 @@
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHandler extends Thread {
     private static final List<ClientHandler> clients = new ArrayList<>();
     private Socket clientSocket;
-    private PrintWriter out;
+    private ObjectOutputStream objectOutputStream;
     private String username;
-
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -17,43 +18,50 @@ public class ClientHandler extends Thread {
     @Override
     public void run() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            // Initialize the ObjectOutputStream for sending messages
+            objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
 
-            this.username = in.readLine();
-            System.out.println(username + " has connected.");
-            out.println(username + " has connected.");
+            Message connectMessage = Message.receiveObject(objectInputStream);
+            this.username = connectMessage.getMessage();
 
             synchronized (clients) {
                 for (ClientHandler client : clients) {
-                    System.out.println(username + " has joined the chat.");
                     client.sendMessage(username + " has joined the chat.");
                 }
                 clients.add(this);
             }
 
-            String message;
-            while ((message = in.readLine()) != null) {
-                if (message.equals("GET_CLIENTS")) {
-                    // Respond with the list of clients
-                        out.println(listToArray(clients));
-                } else {
-                    // Handle regular messages
-                    synchronized (clients) {
-                        for (ClientHandler client : clients) {
-                            client.sendMessage(username + ": " + message);
+            while (true) {
+                Message message = Message.receiveObject(objectInputStream);
+                if (message != null) {
+                    if (message.isRequest()) {
+                        // Respond with the list of clients
+                        objectOutputStream.writeObject(new Message(getUsers(), false, true));
+                    } else {
+                        // Handle regular messages
+                        synchronized (clients) {
+                            for (ClientHandler client : clients) {
+                                client.sendMessage(username + ": " + message.getMessage());
+                            }
                         }
                     }
                 }
+
+                // Adjust the sleep duration to reduce unnecessary looping
+                Thread.sleep(100);
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             e.printStackTrace();
         } finally {
             synchronized (clients) {
                 clients.remove(this);
                 for (ClientHandler client : clients) {
-                    System.out.println(username + " has left the chat.");
-                    client.sendMessage(username + " has left the chat.");
+                    try {
+                        client.sendMessage(username + " has left the chat.");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             try {
@@ -64,21 +72,18 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private String listToArray(List<ClientHandler> clients) {
-        StringBuilder x = new StringBuilder();
-        x.append("CLIENT_LIST:");
-        for(int i = 0;i<clients.size();i++){
-            x.append(clients.get(i).username+",");
+    public void sendMessage(String message) throws IOException {
+        if (objectOutputStream != null) {
+            // Send the Message object using ObjectOutputStream
+            Message.sendObject(objectOutputStream, new Message(message, false, false));
         }
-        return x.toString();
     }
 
-    public void sendMessage(String message) {
-        if (out != null) {
-            out.println(message);
+    public List<String> getUsers() {
+        List<String> userNames = new ArrayList<>();
+        for (ClientHandler client : clients) {
+            userNames.add(client.username);
         }
-    }
-    public String getUsername() {
-        return username;
+        return userNames;
     }
 }
