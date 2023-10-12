@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ClientHandler extends Thread {
     private static final List<ClientHandler> clients = new ArrayList<>();
-    private Socket clientSocket;
+    private final Socket clientSocket;
     private ObjectOutputStream objectOutputStream;
     private String username;
 
@@ -80,14 +80,14 @@ public class ClientHandler extends Thread {
 
     private void sendImage(byte[] imageData) throws IOException {
         if (objectOutputStream != null){
-            Message.sendObject(objectOutputStream, new Message(imageData,true,username));
+            Message.sendObjectAsync(objectOutputStream, new Message(imageData,true,username));
         }
     }
 
     public void sendMessage(String message) throws IOException {
         if (objectOutputStream != null) {
             // Send the Message object using ObjectOutputStream
-            Message.sendObject(objectOutputStream, new Message(message, false, false));
+            Message.sendObjectAsync(objectOutputStream, new Message(message, false, false));
         }
     }
 

@@ -64,11 +64,20 @@ public class Message implements Serializable {
     public List<String> getUsers() {
         return users;
     }
-    public String getUserSent(){return userSent;}
+    public String getUserSent(){
+        return userSent;
+    }
 
-    public static void sendObject(ObjectOutputStream objectOutputStream, Message message) throws IOException {
-        objectOutputStream.writeObject(message);
-        objectOutputStream.flush();
+    public static void sendObjectAsync(ObjectOutputStream objectOutputStream, Message message) {
+        Thread senderThread = new Thread(() -> {
+            try {
+                objectOutputStream.writeObject(message);
+                objectOutputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        senderThread.start();
     }
 
     public static Message receiveObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
