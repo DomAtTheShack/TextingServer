@@ -42,7 +42,13 @@ public class ClientHandler extends Thread {
                     } else if (message.isImage()) {
                         synchronized (clients) {
                             for (ClientHandler client : clients) {
-                                client.sendImage(message.getByteData(),message.getUserSent());
+                                client.sendData(message.getByteData(),message.getUserSent(), true);
+                            }
+                        }
+                    } else if(message.isAudio()){
+                        synchronized (clients){
+                            for(ClientHandler client : clients){
+                                client.sendData(message.getByteData(),message.getUserSent(), false);
                             }
                         }
                     } else {
@@ -81,9 +87,13 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void sendImage(byte[] imageData, String userSent) throws IOException {
+    private void sendData(byte[] data, String userSent, boolean isImage) throws IOException {
         if (objectOutputStream != null){
-            Message.sendObjectAsync(objectOutputStream, new Message(imageData,true,false, userSent));
+            if(isImage) {
+                Message.sendObjectAsync(objectOutputStream, new Message(data, true, false, userSent));
+            }else {
+                Message.sendObjectAsync(objectOutputStream, new Message(data, false, true, userSent));
+            }
         }
     }
 
