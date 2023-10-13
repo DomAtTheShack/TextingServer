@@ -9,10 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Port Update">
-      <change afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
+    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Updated Entire Message sending system to sending objects instead of strings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +42,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/dooli/IdeaProjects/Texting Server/src",
+    "last_opened_file_path": "C:/Users/dooli/IdeaProjects/Texting Server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -104,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696632262940</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated Entire Message sending system to sending objects instead of strings">
+      <created>1697146857643</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697146857643</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +126,7 @@
     <MESSAGE value="Server GUI added with args to" />
     <MESSAGE value="Server GUI added with args too" />
     <MESSAGE value="Port Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Port Update" />
+    <MESSAGE value="Updated Entire Message sending system to sending objects instead of strings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Entire Message sending system to sending objects instead of strings" />
   </component>
 </project>

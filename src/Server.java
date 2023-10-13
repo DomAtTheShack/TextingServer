@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
-import java.util.List;
 
 public class Server {
 
@@ -13,7 +12,7 @@ public class Server {
                 if (args.length >= 2 || !args[0].equals("-nogui")) {
                     System.out.println("Invalid Args or Too Many");
                     System.exit(0);
-                } else if (args[0].equals("-nogui")) {
+                } else {
                     ServerSocket serverSocket = new ServerSocket(PORT);
                     System.out.println("Server started. Waiting for clients to connect...");
 
@@ -51,7 +50,7 @@ public class Server {
                 }
             }
     private static class CustomOutputStream extends OutputStream {
-        private JTextArea textArea;
+        private final JTextArea textArea;
 
         public CustomOutputStream(JTextArea textArea) {
             this.textArea = textArea;

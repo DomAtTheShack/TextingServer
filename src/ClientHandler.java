@@ -28,6 +28,7 @@ public class ClientHandler extends Thread {
             synchronized (clients) {
                 for (ClientHandler client : clients) {
                     client.sendMessage(username + " has joined the chat.");
+                    System.out.println(username + " has joined the chat.");
                 }
                 clients.add(this);
             }
@@ -41,7 +42,7 @@ public class ClientHandler extends Thread {
                     } else if (message.isImage()) {
                         synchronized (clients) {
                             for (ClientHandler client : clients) {
-                                client.sendImage(message.getImageData());
+                                client.sendImage(message.getByteData(),message.getUserSent());
                             }
                         }
                     } else {
@@ -49,6 +50,7 @@ public class ClientHandler extends Thread {
                         synchronized (clients) {
                             for (ClientHandler client : clients) {
                                 client.sendMessage(username + ": " + message.getMessage());
+                                System.out.println(username + ": " + message.getMessage());
                             }
                         }
                     }
@@ -65,6 +67,7 @@ public class ClientHandler extends Thread {
                 for (ClientHandler client : clients) {
                     try {
                         client.sendMessage(username + " has left the chat.");
+                        System.out.println(username + " has left the chat.");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -78,9 +81,9 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void sendImage(byte[] imageData) throws IOException {
+    private void sendImage(byte[] imageData, String userSent) throws IOException {
         if (objectOutputStream != null){
-            Message.sendObjectAsync(objectOutputStream, new Message(imageData,true,username));
+            Message.sendObjectAsync(objectOutputStream, new Message(imageData,true,false, userSent));
         }
     }
 
