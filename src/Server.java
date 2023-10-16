@@ -18,7 +18,7 @@ public class Server {
 
                     while (true) {
                         Socket clientSocket = serverSocket.accept();
-                        new ClientHandler(clientSocket).start();
+                        new ClientHandler(clientSocket, 0).start();
                     }
                 }
                 } else {
@@ -42,7 +42,7 @@ public class Server {
 
                     while (true) {
                         Socket clientSocket = serverSocket.accept();
-                        new ClientHandler(clientSocket).start();
+                        new ClientHandler(clientSocket, 0).start();
                     }
                 }
             } catch(IOException e){

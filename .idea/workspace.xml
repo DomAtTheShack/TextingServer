@@ -9,9 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Updated picture sending username and TO ADD AUDIO">
+    <list default="true" id="a390e239-c34e-4971-ad51-46c114fed060" name="Changes" comment="Port Update">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Texting_Server_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,15 +43,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/dooli/IdeaProjects/Texting Server",
+    "last_opened_file_path": "/home/dominichann/IdeaProjects/TextingServer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
@@ -103,21 +109,7 @@
       <option name="project" value="LOCAL" />
       <updated>1696632262940</updated>
     </task>
-    <task id="LOCAL-00005" summary="Updated Entire Message sending system to sending objects instead of strings">
-      <created>1697146857643</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1697146857643</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Updated picture sending username and TO ADD AUDIO">
-      <created>1697159957801</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1697159957801</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,8 +123,6 @@
     <MESSAGE value="Server GUI added with args to" />
     <MESSAGE value="Server GUI added with args too" />
     <MESSAGE value="Port Update" />
-    <MESSAGE value="Updated Entire Message sending system to sending objects instead of strings" />
-    <MESSAGE value="Updated picture sending username and TO ADD AUDIO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated picture sending username and TO ADD AUDIO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Port Update" />
   </component>
 </project>
