@@ -40,7 +40,6 @@ public class ClientHandler extends Thread {
 
             while (true) {
                 Packet packet = Packet.receiveObject(objectInputStream);
-                System.out.println(packet.getRoom());
                 if (packet != null) {
                     if (packet.getID() == Packet.Type.UserRequest) {
                         // Respond with the list of clients
@@ -66,7 +65,6 @@ public class ClientHandler extends Thread {
                             }
                         }
                     } else {
-                        System.out.println(packet.getID().toString());
                         // Handle regular messages
                         synchronized (clients) {
                             for (ClientHandler client : clients) {
