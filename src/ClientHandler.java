@@ -60,7 +60,13 @@ public class ClientHandler extends Thread {
                         synchronized (clients){
                             for(ClientHandler client: clients) {
                                 if(client.username.equals(packet.getUserSent()) && validRoom(packet.getRoom())){
+                                    for(ClientHandler client2 : clients){
+                                        client2.sendMessage(packet.getUserSent() + " has left chatroom " + packet.getOldRoom(),packet.getOldRoom());
+                                    }
                                     client.changeRoom(packet.getRoom(), packet.getUserSent());
+                                    for(ClientHandler client2 : clients){
+                                        client2.sendMessage(packet.getUserSent() + " has joined chatroom " + packet.getRoom(),packet.getRoom());
+                                    }
                                 }
                             }
                         }
@@ -103,7 +109,7 @@ public class ClientHandler extends Thread {
 
     private void changeRoom(int room1, String user) {
         if (objectOutputStream != null) {
-            Packet.sendObjectAsync(objectOutputStream, new Packet(room1, Packet.Type.RoomChange, user));
+            Packet.sendObjectAsync(objectOutputStream, new Packet(room1, Packet.Type.RoomChange, user, room));
             room = room1;
         }
     }
