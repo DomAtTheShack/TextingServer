@@ -63,7 +63,9 @@ public class ClientHandler extends Thread {
                                     for(ClientHandler client2 : clients){
                                         client2.sendMessage(packet.getUserSent() + " has left chatroom " + packet.getOldRoom(),packet.getOldRoom());
                                     }
+                                    Thread.sleep(40);
                                     client.changeRoom(packet.getRoom(), packet.getUserSent());
+                                    Thread.sleep(40);
                                     for(ClientHandler client2 : clients){
                                         client2.sendMessage(packet.getUserSent() + " has joined chatroom " + packet.getRoom(),packet.getRoom());
                                     }
