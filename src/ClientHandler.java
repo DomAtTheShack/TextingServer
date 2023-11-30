@@ -12,7 +12,7 @@ public class ClientHandler extends Thread {
     private final Socket clientSocket;
     private ObjectOutputStream objectOutputStream;
     private String username;
-    private int[] rooms = {0,1,2};
+    private final int[] rooms = {0,1,2};
     private int room;
 
     public ClientHandler(Socket socket, int room) {
@@ -32,6 +32,7 @@ public class ClientHandler extends Thread {
 
             synchronized (clients) {
                 clients.add(this);
+                this.sendPing();
                 for (ClientHandler client : clients) {
                     if(client.room == this.room) client.sendMessage(username + " has joined the chatroom "+ this.room, this.room);
                 }
@@ -106,6 +107,13 @@ public class ClientHandler extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void sendPing() {
+        if(objectOutputStream != null)
+        {
+            Packet.sendObjectAsync(objectOutputStream, new Packet(Packet.Type.Ping));
         }
     }
 

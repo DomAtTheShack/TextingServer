@@ -1,7 +1,6 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -95,6 +94,7 @@ public class Packet implements Serializable {
     public int getOldRoom() {
         return oldRoom;
     }
+
 
     enum Type{
         Image, Audio, Message, UserRequest, RoomChange, Ping;
